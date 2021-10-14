@@ -1,14 +1,35 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { ChakraProvider, extendTheme } from "@chakra-ui/react";
+
+const colors = {
+  brand: {
+    900: "#ff8547",
+    700: "#ff5300",
+    500: "#cc4400",
+  },
+  floralWhite: {
+    500: "#FFFCF2",
+  },
+  silver: {
+    500: "#CCC5b9",
+  },
+  blackOlive: {
+    500: "#403D39",
+  },
+  eerieBlack: {
+    500: "#252422",
+  },
+};
+const theme = extendTheme({ colors });
 
 ReactDOM.render(
-  <React.StrictMode>
+  <ChakraProvider theme={theme}>
     <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+  </ChakraProvider>,
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function
