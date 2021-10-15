@@ -1,25 +1,25 @@
 export function calcBest(data) {
-    let lowestBuy = Number.POSITIVE_INFINITY;
-    let highestSell = Number.NEGATIVE_INFINITY;
-    let exchangeToBuy = null;
-    let exchangeToSell = null;
+  let lowestBuy = Number.POSITIVE_INFINITY;
+  let highestSell = Number.NEGATIVE_INFINITY;
+  let exchangeToBuy = null;
+  let exchangeToSell = null;
 
-    let keys = Object.keys(data)
+  let keys = Object.keys(data);
 
-    for(let i = 0; i < keys.length; i++){
-        let name = keys[i];
-        let buy = data[name].buy;
-        let sell = data[name].sell;
+  for (let i = 0; i < keys.length; i++) {
+    let name = keys[i];
+    let buy = data[name].buy;
+    let sell = data[name].sell;
 
-        if(buy < lowestBuy){
-            lowestBuy = buy;
-            exchangeToBuy = name;
-        }
-        if(sell > highestSell){
-            highestSell = sell;
-            exchangeToSell = name;
-        }
+    if (buy < lowestBuy) {
+      lowestBuy = buy;
+      exchangeToBuy = name;
     }
+    if (sell > highestSell) {
+      highestSell = sell;
+      exchangeToSell = name;
+    }
+  }
 
-    return {buy: exchangeToBuy, sell: exchangeToSell}
+  return { buy: exchangeToBuy, sell: exchangeToSell };
 }

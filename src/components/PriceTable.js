@@ -9,13 +9,8 @@ import {
   Tbody,
   Tfoot,
 } from "@chakra-ui/react";
-import {useEffect, useState} from "react";
-import {getAllBTC, getAllETH} from "../functions/dataAPI";
-import {calcBest} from "../functions/calc";
-
-
-
-
+import { useEffect, useState } from "react";
+import { calcBest } from "../functions/calc";
 
 function makeTableRows(data) {
   let resp = [];
@@ -29,8 +24,8 @@ function makeTableRows(data) {
     resp.push(
       <Tr>
         <Td>{exchange}</Td>
-        <Td isNumeric>{buy}</Td>
-        <Td isNumeric>{sell}</Td>
+        <Td isNumeric>{parseFloat(buy).toFixed(3) + " $"}</Td>
+        <Td isNumeric>{parseFloat(sell).toFixed(3) + " $"}</Td>
       </Tr>
     );
   }
@@ -46,7 +41,6 @@ function PriceTable(props) {
     setBestBuy(best.buy);
     setBestSell(best.sell);
   }, []);
-
 
   return (
     <Flex {...props}>
@@ -70,8 +64,20 @@ function PriceTable(props) {
         <Tfoot>
           <Tr>
             <Th color="blue.600">Best</Th>
-            <Th isNumeric color="green.600" fontSize="22px">{bestBuy}</Th>
-            <Th isNumeric color="red.600" fontSize="22px">{bestSell}</Th>
+            <Th
+              isNumeric
+              color="green.600"
+              fontSize={{ base: "16px", md: "22px" }}
+            >
+              {bestBuy}
+            </Th>
+            <Th
+              isNumeric
+              color="red.600"
+              fontSize={{ base: "16px", md: "22px" }}
+            >
+              {bestSell}
+            </Th>
           </Tr>
         </Tfoot>
       </Table>
