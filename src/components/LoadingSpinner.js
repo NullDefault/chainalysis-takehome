@@ -1,5 +1,5 @@
 import { Flex, Spinner } from "@chakra-ui/react";
-
+// Spinner shown in the Currency Block while the data is loading
 function LoadingSpinner(props) {
   return (
     <Flex alignItems="center" justifyContent="center" {...props}>

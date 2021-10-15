@@ -1,9 +1,9 @@
 import { chakra, Flex, useColorModeValue } from "@chakra-ui/react";
 import Logo from "./Logo";
 import { ColorModeSwitch } from "./ColorModeSwitch";
-
+// Header component
 function Header() {
-  const bg = useColorModeValue("gray.200", "eerieBlack.500");
+  const bg = useColorModeValue("floralWhite.500", "eerieBlack.500");
 
   return (
     <chakra.header

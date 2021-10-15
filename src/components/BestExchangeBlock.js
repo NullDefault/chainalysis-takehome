@@ -1,6 +1,6 @@
 import { Stat, StatLabel, StatNumber } from "@chakra-ui/react";
-
-function BestExchangeStat(props) {
+// Component for displaying the best exchange
+function BestExchangeBlock(props) {
   return (
     <Stat {...props}>
       <StatLabel>{props.exchange}</StatLabel>
@@ -11,4 +11,4 @@ function BestExchangeStat(props) {
   );
 }
 
-export default BestExchangeStat;
+export default BestExchangeBlock;

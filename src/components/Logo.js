@@ -1,5 +1,5 @@
 import { chakra } from "@chakra-ui/react";
-
+// SVG Chainalysis logo - taken directly from your website
 function Logo(props) {
   return (
     <chakra.svg

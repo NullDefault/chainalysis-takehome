@@ -1,3 +1,4 @@
+// To streamline the format for specifying currency
 const symbol_dict = {
   Ethereum: "ETH",
   Bitcoin: "BTC",
@@ -16,7 +17,7 @@ export const getAllBTC = async (setData) => {
 
   setData({ Kraken: kraken, Coinbase: coinbase });
 };
-
+// Gets data from the kraken api for the specified currency
 const getKrakenData = async (currency) => {
   const response = await fetch(
     "https://api.kraken.com/0/public/Ticker?pair=" +
@@ -27,14 +28,14 @@ const getKrakenData = async (currency) => {
   let resJson = await response.json();
   resJson = resJson.result;
 
-  let dataKey = Object.keys(resJson)[0];
+  let dataKey = Object.keys(resJson)[0]; // this is needed because of the nested format of the response json
 
   let buy = resJson[dataKey].a[0];
   let sell = resJson[dataKey].b[0];
 
   return { buy, sell };
 };
-
+// Gets data from the coinbase api for the specified currency
 const getCoinbaseData = async (currency) => {
   const buyResponse = await fetch(
     "https://api.coinbase.com/v2/prices/" + symbol_dict[currency] + "-USD/buy"

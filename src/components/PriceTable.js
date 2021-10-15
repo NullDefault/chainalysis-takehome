@@ -10,12 +10,41 @@ import {
   Td,
   Tbody,
   Tfoot,
+  useColorModeValue
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { calcBest } from "../functions/calc";
 import { FaDollarSign } from "react-icons/fa";
-import BestExchangeStat from "./BestExchangeStat";
+import BestExchangeBlock from "./BestExchangeBlock";
+// function to calculate the best exchanges for both buying and selling
+export function calcBest(data) {
+  let lowestBuy = Number.POSITIVE_INFINITY;
+  let highestSell = Number.NEGATIVE_INFINITY;
+  let exchangeToBuy = null;
+  let exchangeToSell = null;
 
+  let keys = Object.keys(data);
+
+  for (let i = 0; i < keys.length; i++) {
+    let name = keys[i];
+    let buy = data[name].buy;
+    let sell = data[name].sell;
+
+    if (buy < lowestBuy) {
+      lowestBuy = buy;
+      exchangeToBuy = name;
+    }
+    if (sell > highestSell) {
+      highestSell = sell;
+      exchangeToSell = name;
+    }
+  }
+
+  return {
+    buy: { exchange: exchangeToBuy, value: lowestBuy },
+    sell: { exchange: exchangeToSell, value: highestSell },
+  };
+}
+// function to generate exchange rows. This way the exchanges aren't hard coded.
 function makeTableRows(data, bestBuy, bestSell) {
   let resp = [];
   let keys = Object.keys(data);
@@ -48,7 +77,7 @@ function makeTableRows(data, bestBuy, bestSell) {
   }
   return resp;
 }
-
+// Component for displaying exchange data in a table format.
 function PriceTable(props) {
   const [bestBuy, setBestBuy] = useState({});
   const [bestSell, setBestSell] = useState({});
@@ -61,18 +90,18 @@ function PriceTable(props) {
 
   return (
     <Flex {...props} px="12px" pb="12px">
-      <Table variant="simple" size={{base: "sm", md: "md"}}>
-        <TableCaption bg={props.currencyColor} color="white">
+      <Table variant="simple" size={{ base: "sm", md: "md" }} color={useColorModeValue("gray.700", "silver.500")}>
+        <TableCaption bg={props.currencyColor} >
           {props.currency}
         </TableCaption>
         <Thead>
           {" "}
           <Tr>
-            <Th color="gray.600">Exchange</Th>
-            <Th isNumeric color="green">
+            <Th color={useColorModeValue("gray.700", "gray.400")}>Exchange</Th>
+            <Th isNumeric color={useColorModeValue("green.600", "green.500")}>
               Buy
             </Th>
-            <Th isNumeric color="red">
+            <Th isNumeric color={useColorModeValue("red.600", "red.500")}>
               Sell
             </Th>
           </Tr>
@@ -86,13 +115,13 @@ function PriceTable(props) {
               Best
             </Th>
             <Th isNumeric color="green.600">
-              <BestExchangeStat
+              <BestExchangeBlock
                 exchange={bestBuy.exchange}
                 value={bestBuy.value}
               />
             </Th>
             <Th isNumeric color="red.600">
-              <BestExchangeStat
+              <BestExchangeBlock
                 exchange={bestSell.exchange}
                 value={bestSell.value}
               />
