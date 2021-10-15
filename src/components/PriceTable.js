@@ -61,13 +61,13 @@ function makeTableRows(data, bestBuy, bestSell) {
       <Tr fontWeight="semibold">
         <Td fontSize={{ base: "12px", md: "26px" }}>{exchange}</Td>
         <Td isNumeric>
-          <Tag variant="solid" colorScheme={buyColor}>
+          <Tag my="4px" variant="solid" colorScheme={buyColor}>
             {parseFloat(buy).toFixed(2)}
             <TagRightIcon boxSize="12px" as={FaDollarSign} />
           </Tag>
         </Td>
         <Td isNumeric>
-          <Tag variant="solid" colorScheme={sellColor}>
+          <Tag my="4px" variant="solid" colorScheme={sellColor}>
             {parseFloat(sell).toFixed(2)}
             <TagRightIcon boxSize="12px" as={FaDollarSign} />
           </Tag>
