@@ -60,8 +60,8 @@ function PriceTable(props) {
   }, []);
 
   return (
-    <Flex {...props}>
-      <Table variant="simple" size="sm">
+    <Flex {...props} px="12px" pb="12px">
+      <Table variant="simple" size={{base: "sm", md: "md"}}>
         <TableCaption bg={props.currencyColor} color="white">
           {props.currency}
         </TableCaption>

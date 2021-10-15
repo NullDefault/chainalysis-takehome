@@ -21,8 +21,18 @@ function App() {
           direction={{ base: "column", md: "row" }}
           color="black"
         >
-            <CurrencyBlock currency="Bitcoin" mt={{base: "8%", md: "0"}} mr={{base: "0", md: "3%"}}/>
-            <CurrencyBlock currency="Ethereum" mb={{base: "8%", md: "0"}} mt={{base: "8%", md: "0"}}/>
+          <CurrencyBlock
+            currency="Bitcoin"
+            w={{base: "100%", md: "50%"}}
+            mt={{ base: "8%", md: "0" }}
+            mr={{ base: "0", md: "3%" }}
+          />
+          <CurrencyBlock
+            currency="Ethereum"
+            w={{base: "100%", md: "50%"}}
+            mb={{ base: "8%", md: "0" }}
+            mt={{ base: "8%", md: "0" }}
+          />
         </Flex>
       </Flex>
     </Box>
