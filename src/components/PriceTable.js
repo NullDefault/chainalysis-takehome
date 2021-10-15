@@ -1,5 +1,7 @@
 import {
   Flex,
+  Tag,
+  TagRightIcon,
   Table,
   TableCaption,
   Thead,
@@ -11,8 +13,10 @@ import {
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { calcBest } from "../functions/calc";
+import {FaDollarSign} from "react-icons/fa";
+import BestExchangeStat from "./BestExchangeStat";
 
-function makeTableRows(data) {
+function makeTableRows(data, bestBuy, bestSell) {
   let resp = [];
   let keys = Object.keys(data);
 
@@ -21,11 +25,24 @@ function makeTableRows(data) {
     let buy = data[exchange].buy;
     let sell = data[exchange].sell;
 
+    let buyColor = exchange === bestBuy ? "blue" : "gray";
+    let sellColor = exchange === bestSell ? "blue" : "gray";
+
     resp.push(
       <Tr>
         <Td>{exchange}</Td>
-        <Td isNumeric>{parseFloat(buy).toFixed(3) + " $"}</Td>
-        <Td isNumeric>{parseFloat(sell).toFixed(3) + " $"}</Td>
+        <Td isNumeric>
+          <Tag variant="solid" colorScheme={buyColor}>
+            {parseFloat(buy).toFixed(2)}
+            <TagRightIcon boxSize="12px" as={FaDollarSign} />
+          </Tag>
+        </Td>
+        <Td isNumeric>
+          <Tag variant="solid" colorScheme={sellColor}>
+            {parseFloat(sell).toFixed(2)}
+            <TagRightIcon boxSize="12px" as={FaDollarSign} />
+          </Tag>
+        </Td>
       </Tr>
     );
   }
@@ -60,7 +77,7 @@ function PriceTable(props) {
             </Th>
           </Tr>
         </Thead>
-        <Tbody>{makeTableRows(props.data, setBestBuy, setBestSell)}</Tbody>
+        <Tbody>{makeTableRows(props.data, bestBuy.exchange, bestSell.exchange)}</Tbody>
         <Tfoot>
           <Tr>
             <Th color="blue.600">Best</Th>
@@ -69,14 +86,14 @@ function PriceTable(props) {
               color="green.600"
               fontSize={{ base: "16px", md: "22px" }}
             >
-              {bestBuy}
+              <BestExchangeStat exchange={bestBuy.exchange} value={bestBuy.value}/>
             </Th>
             <Th
               isNumeric
               color="red.600"
               fontSize={{ base: "16px", md: "22px" }}
             >
-              {bestSell}
+              <BestExchangeStat exchange={bestSell.exchange} value={bestSell.value}/>
             </Th>
           </Tr>
         </Tfoot>

@@ -21,5 +21,8 @@ export function calcBest(data) {
     }
   }
 
-  return { buy: exchangeToBuy, sell: exchangeToSell };
+  return {
+    buy: { exchange: exchangeToBuy, value: lowestBuy },
+    sell: { exchange: exchangeToSell, value: highestSell },
+  };
 }
