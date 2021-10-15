@@ -45,7 +45,7 @@ function CurrencyBlock(props) {
       {data !== null ? (
         <PriceTable
           currency={props.currency}
-          currencyColor={bg}
+          currencycolor={bg} // this was giving me a weird console error, which is why it's not in camelCase
           data={data}
           h="88%"
         />

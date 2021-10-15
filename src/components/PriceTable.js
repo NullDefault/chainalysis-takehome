@@ -1,5 +1,6 @@
 import {
   Flex,
+  ScaleFade,
   Tag,
   TagRightIcon,
   Table,
@@ -10,7 +11,7 @@ import {
   Td,
   Tbody,
   Tfoot,
-  useColorModeValue
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { FaDollarSign } from "react-icons/fa";
@@ -58,19 +59,23 @@ function makeTableRows(data, bestBuy, bestSell) {
     let sellColor = exchange === bestSell ? "blue" : "gray";
 
     resp.push(
-      <Tr fontWeight="semibold">
+      <Tr fontWeight="semibold" key={i}>
         <Td fontSize={{ base: "12px", md: "26px" }}>{exchange}</Td>
         <Td isNumeric>
-          <Tag my="4px" variant="solid" colorScheme={buyColor}>
-            {parseFloat(buy).toFixed(2)}
-            <TagRightIcon boxSize="12px" as={FaDollarSign} />
-          </Tag>
+          <ScaleFade initialScale={0.8} in={true}>
+            <Tag my="4px" variant="solid" colorScheme={buyColor}>
+              {parseFloat(buy).toFixed(2)}
+              <TagRightIcon boxSize="12px" as={FaDollarSign} />
+            </Tag>
+          </ScaleFade>
         </Td>
         <Td isNumeric>
-          <Tag my="4px" variant="solid" colorScheme={sellColor}>
-            {parseFloat(sell).toFixed(2)}
-            <TagRightIcon boxSize="12px" as={FaDollarSign} />
-          </Tag>
+          <ScaleFade initialScale={0.8} in={true}>
+            <Tag my="4px" variant="solid" colorScheme={sellColor}>
+              {parseFloat(sell).toFixed(2)}
+              <TagRightIcon boxSize="12px" as={FaDollarSign} />
+            </Tag>
+          </ScaleFade>
         </Td>
       </Tr>
     );
@@ -90,12 +95,13 @@ function PriceTable(props) {
 
   return (
     <Flex {...props} px="12px" pb="12px">
-      <Table variant="simple" size={{ base: "sm", md: "md" }} color={useColorModeValue("gray.700", "silver.500")}>
-        <TableCaption bg={props.currencyColor} >
-          {props.currency}
-        </TableCaption>
+      <Table
+        variant="simple"
+        size={{ base: "sm", md: "md" }}
+        color={useColorModeValue("gray.700", "silver.500")}
+      >
+        <TableCaption bg={props.currencycolor}>{props.currency}</TableCaption>
         <Thead>
-          {" "}
           <Tr>
             <Th color={useColorModeValue("gray.700", "gray.400")}>Exchange</Th>
             <Th isNumeric color={useColorModeValue("green.600", "green.500")}>
