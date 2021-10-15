@@ -2,9 +2,19 @@ import { Flex, Box, Icon, useColorModeValue } from "@chakra-ui/react";
 import Header from "./components/Header";
 import { FaEthereum, FaBtc } from "react-icons/fa";
 import PriceTable from "./components/PriceTable";
+import { getAllBTC, getAllETH } from "./functions/dataAPI";
+import { useEffect, useState } from "react";
 
 function App() {
   const bg = useColorModeValue("white", "blackOlive.500");
+  const [ethData, setETHData] = useState(null);
+  const [btcData, setBTCData] = useState(null);
+
+  useEffect(() => {
+    getAllETH(setETHData);
+    getAllBTC(setBTCData);
+  }, []);
+
   return (
     <Box>
       <Header />
@@ -25,7 +35,16 @@ function App() {
                 color="floralWhite.500"
               />
             </Flex>
-            <PriceTable currency="Ethereum" currencyColor="teal.500" />
+            {ethData !== null ? (
+              <PriceTable
+                currency="Ethereum"
+                currencyColor="teal.500"
+                data={ethData}
+                h="100%"
+              />
+            ) : (
+              <div>...loading </div>
+            )}
           </Flex>
           <Flex direction="column" w="100%" bg="silver.500">
             <Flex height="12%" bg="orange.500" w="100%" alignItems="center">
@@ -36,7 +55,16 @@ function App() {
                 color="floralWhite.500"
               />
             </Flex>
-            <PriceTable currency="Bitcoin" currencyColor="orange.500" />
+            {btcData !== null ? (
+              <PriceTable
+                currency="Bitcoin"
+                currencyColor="orange.500"
+                data={btcData}
+                h="100%"
+              />
+            ) : (
+              <div>...loading </div>
+            )}
           </Flex>
         </Flex>
       </Flex>
