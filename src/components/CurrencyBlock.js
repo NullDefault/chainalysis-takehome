@@ -28,7 +28,7 @@ function CurrencyBlock(props) {
   return (
     <Flex
       direction="column"
-      w="100%"
+      w={{ base: "", md: "100%" }}
       bg="silver.500"
       {...props}
     >
@@ -52,6 +52,7 @@ function CurrencyBlock(props) {
           currencyColor={currencySpecific[props.currency].bgColor}
           data={data}
           h="100%"
+          w="100%"
         />
       ) : (
         <LoadingSpinner h="100%" />

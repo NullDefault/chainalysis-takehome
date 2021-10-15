@@ -7,9 +7,9 @@ function Header() {
 
   return (
     <chakra.header bg={bg} w="full" px={{ base: 2, sm: 4 }} py={4} shadow="md">
-      <Flex  justify="space-between">
+      <Flex justify="space-between">
         <Flex direction="row">
-          <Logo p="4px" width={{base: "150px", md: "250px"}}/>
+          <Logo p="4px" width={{ base: "150px", md: "250px" }} />
         </Flex>
         <ColorModeSwitch />
       </Flex>

@@ -20,7 +20,6 @@ function App() {
           minW="80vw"
           direction={{ base: "column", md: "row" }}
           color="black"
-          p={{base: "4vw", md: "0"}}
         >
             <CurrencyBlock currency="Bitcoin" mr={{base: "0", md: "3%"}}/>
             <CurrencyBlock currency="Ethereum" mt={{base: "8%", md: "0"}}/>
