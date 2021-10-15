@@ -50,8 +50,8 @@ function makeTableRows(data, bestBuy, bestSell) {
 }
 
 function PriceTable(props) {
-  const [bestBuy, setBestBuy] = useState(null);
-  const [bestSell, setBestSell] = useState(null);
+  const [bestBuy, setBestBuy] = useState({});
+  const [bestSell, setBestSell] = useState({});
 
   useEffect(() => {
     let best = calcBest(props.data);
