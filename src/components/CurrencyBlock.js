@@ -1,28 +1,31 @@
 import { Flex, Icon, useColorModeValue } from "@chakra-ui/react";
-import { FaEthereum, FaBitcoin } from "react-icons/fa";
+import { FaEthereum, FaBitcoin, FaRegIdCard } from "react-icons/fa";
 import PriceTable from "./PriceTable";
-import { getAllBTC, getAllETH } from "../dataAPI";
+import { getAllCurrency } from "../dataAPI";
 import { useEffect, useState } from "react";
 import LoadingSpinner from "./LoadingSpinner";
 // json object containing currency based elements of functionality. Helps keeps the code DRY
 const currencySpecific = {
   Ethereum: {
     bgColor: ["teal.400", "teal.600"],
-    getData: getAllETH,
     icon: FaEthereum,
   },
   Bitcoin: {
     bgColor: ["orange.400", "orange.600"],
-    getData: getAllBTC,
     icon: FaBitcoin,
   },
+  Cardano: {
+    bgColor: ["blue.400", "blue.600"],
+    icon: FaRegIdCard
+  }
 };
+
 // Component for displaying buy / sell data for a cryptocurrency
 function CurrencyBlock(props) {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    currencySpecific[props.currency].getData(setData);
+    getAllCurrency(setData, props.currency)
   }, []);
 
   const bg = useColorModeValue(...currencySpecific[props.currency].bgColor);

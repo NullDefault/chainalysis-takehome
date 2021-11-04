@@ -2,21 +2,16 @@
 const symbol_dict = {
   Ethereum: "ETH",
   Bitcoin: "BTC",
+  Cardano: "ADA"
 };
 
-export const getAllETH = async (setData) => {
-  let kraken = await getKrakenData("Ethereum");
-  let coinbase = await getCoinbaseData("Ethereum");
+export const getAllCurrency = async(setData, currency) => {
+  let kraken = await getKrakenData(currency);
+  let coinbase = await getCoinbaseData(currency);
 
   setData({ Kraken: kraken, Coinbase: coinbase });
-};
+}
 
-export const getAllBTC = async (setData) => {
-  let kraken = await getKrakenData("Bitcoin");
-  let coinbase = await getCoinbaseData("Bitcoin");
-
-  setData({ Kraken: kraken, Coinbase: coinbase });
-};
 // Gets data from the kraken api for the specified currency
 const getKrakenData = async (currency) => {
   const response = await fetch(
